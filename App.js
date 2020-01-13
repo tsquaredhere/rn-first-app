@@ -11,8 +11,14 @@ export default function App() {
   
   const addGoalHandler = (goalName) => {
     setMyGoals([...myGoals, { key: Math.random().toString(), value: goalName }]);
-    //setmyGoals(currentGoals => [..currentGoals, enteredGoal]); <- better because gives you guaranteed state snapshot.
+    //setmyGoals(myGoals => [..myGoals, { key: Math.random().toString(), value: goalName }); <- better because gives you guaranteed state snapshot.
     //FlatList wants objects with a key
+  }
+
+  const deleteGoalHandler = goalId => {
+    setMyGoals(myGoals => {
+      return myGoals.filter((goal)=>goal.key !== goalId ); 
+    });
   }
 
   return (
@@ -22,7 +28,7 @@ export default function App() {
 
       <FlatList 
         data={myGoals} 
-        renderItem={itemData => <GoalItem title={itemData.item.value} />} />
+        renderItem={itemData => <GoalItem id={itemData.item.key} title={itemData.item.value} onDelete={deleteGoalHandler}/>} />
     </View>
   );
 }
