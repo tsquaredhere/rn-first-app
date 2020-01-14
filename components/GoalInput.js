@@ -9,6 +9,9 @@ const GoalInput = props => {
     }
 
     const addGoalHander = () => {
+      if(goalTitle.length == 0) {
+        return;
+      }
       props.addGoal(enteredGoal);
       setEnteredGoal('');
     }
@@ -62,4 +65,5 @@ const styles = StyleSheet.create({
 //view does not take up full width of the modal. so it only takes up the space of the children (Textinput and button)
 // to make the view take up the whole space, set flex to 1, if it is the only item, it will take up the whole space. 
 // you have to set flex to something. (anything if its the only child)
+//to style Buttons, must wrap in a view. 
 export default GoalInput
